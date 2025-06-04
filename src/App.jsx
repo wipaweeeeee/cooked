@@ -1,34 +1,47 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './styles.scss'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const cookedLevels = [
+    "absolutely cooked.", 
+    "cooked.", 
+    "so cooked.", 
+    "nah, let her cook.", 
+    "we're not sure at this point.", 
+    "duh.",
+    "she's always cooked.",
+    "she's cooked but it's ok.",
+    "1000% cooked.",
+    "Been cooked for days."
+  ]
+
+  const max = 35;
+  const [active, setActive] = useState("cooked.");
+  const [curr, setCurr] = useState(1);
+
+  const handleCookedState = () => {
+    const chance = Math.floor(Math.random() * cookedLevels.length);
+    setActive(cookedLevels[chance]);
+
+    if (curr < max) {
+      setCurr(curr => curr + 1);
+    } else {
+      setCurr(1);
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='container'>
+        <div className='content'>
+          <div className='question'>Is Priscilla Cooked?</div>
+          <div className='answer'>{active}</div>
+        </div>
+        <div onClick={handleCookedState} className='button'>(check again)</div>
+        <div className='scrim' />
+        <div className='imageContainer' style={{backgroundImage: `url(/images/${curr}.png)`}}></div>
+        <div className='imageBlur' style={{backgroundImage: `url(/images/${curr}.png)`}}></div>
+    </div>
   )
 }
 

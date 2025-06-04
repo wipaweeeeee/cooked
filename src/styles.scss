@@ -1,0 +1,154 @@
+//font-face
+@font-face {
+    font-family: 'OctaveDisplayItalic';
+    src: url('/OctaveDisplay-ThinItalic.woff2') format('woff'); /* Pretty Modern Browsers */
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'OctaveDisplay';
+    src: url('/OctaveDisplay-Thin.woff2') format('woff'); /* Pretty Modern Browsers */
+    font-weight: normal;
+}
+
+//breakpoint variables
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+	@media (max-width: #{$tablet-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  body, html, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'OctaveDisplayItalic';
+  }
+
+  .content {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #f8e01a;
+    text-transform: capitalize;
+
+    .question {
+        font-size: 32px;
+      }
+    
+    .answer {
+        font-size: 72px;
+        line-height: 0.8;
+    }
+  }
+
+.button {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f8e01a;
+    cursor: pointer;
+
+    &:hover {
+        font-family: 'OctaveDisplay';
+    }
+}
+
+.scrim {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.00) 42.46%, rgba(0, 0, 0, 0.00) 51.25%, #000 99.07%);
+}
+
+.imageContainer {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.imageBlur {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -3;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(20px);
+}
+
+@include tablet {
+    .content {
+        .question {
+            font-size: 20px;
+          }
+        
+        .answer {
+            font-size: 48px;
+            line-height: 0.8;
+        }
+    }
+}
+
+@include mobile {
+    .content {
+        width: 100%;
+        bottom: 50px;
+        padding: 0 20px;
+        .question {
+            font-size: 20px;
+          }
+        
+        .answer {
+            font-size: 48px;
+            line-height: 0.8;
+        }
+    }
+
+    .button {    
+        &:hover {
+            font-family: 'OctaveDisplayItalic';
+        }
+    }
+
+    .imageContainer {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
